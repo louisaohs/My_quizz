@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My_quizz | Se connecter
+{% endblock %}
+
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+		}
+
+		.topnav {
+			position: fixed;
+			background-color: background: #171717;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			display: flex;
+			justify-content: center;
+			width: 50%;
+			height: 70vh;
+		}
+
+		.infos {
+			padding: 20px;
+			width: 400px;
+			background: #fc5d5d;
+			margin-top: 30%;
+			border-radius: 5px;
+			transition: ease 0.3s;
+		}
+
+		.infos:hover {
+			transform: translateY(9px);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		input {
+			border: none;
+			outline: none;
+			height: 30px;
+			border-radius: 10px;
+			padding: 5px;
+		}
+
+		label {
+			color: white;
+		}
+
+		.title {
+			text-align: center;
+			color: white;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 200px;
+			padding: 5px;
+			color: #fc5d5d;
+			font-weight: bold;
+		}
+
+		.container-design {
+			display: flex;
+			justify-content: center;
+		}
+
+		button {
+			cursor: pointer;
+		}
+	</style>
+
+	<div class="wrapper">
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					<a href="/about">About</a>
+
+					<a href="/register">S'inscrire</a>
+
+					<a href="/login">Se connecter</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos">
+					<form method="post">
+						{% if error %}
+							<div class="">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						<h1 class="title">Se connecter</h1>
+						<label for="inputEmail">Email :</label>
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Exemple : joedoe@gmail.com" required autofocus>
+						<br/>
+						<label for="inputPassword">Mot de passe :</label>
+						<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Exemple : 12345678" autocomplete="current-password" required>
+
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<br/>
+						<div class="container-design">
+							<button class="button-design" type="submit">Se connecter</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

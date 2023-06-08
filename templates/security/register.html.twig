@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My_quizz | S'inscrire
+{% endblock %}
+
+{% block body %}
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		html,
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+		}
+
+		.topnav {
+			position: fixed;
+			background-color: background: #171717;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			display: flex;
+			justify-content: center;
+			width: 50%;
+			height: 70vh;
+		}
+
+		.infos {
+			padding: 20px;
+			width: 400px;
+			height: 110%;
+			background: #fc5d5d;
+			margin-top: 30%;
+			border-radius: 5px;
+			transition: ease 0.3s;
+		}
+
+		.infos:hover {
+			transform: translateY(9px);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		input {
+			border: none;
+			outline: none;
+			height: 30px;
+			border-radius: 10px;
+			padding: 5px;
+		}
+
+		label {
+			color: white;
+		}
+
+		.title {
+			text-align: center;
+			color: white;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 200px;
+			padding: 5px;
+			color: #fc5d5d;
+			font-weight: bold;
+		}
+
+		button {
+			cursor: pointer;
+		}
+
+		.container-design {
+			display: flex;
+			justify-content: center;
+		}
+
+		.mon-form-row {
+			display: flex;
+			flex-direction: column;
+			width: 386px;
+		}
+
+		.title {
+			text-align: center;
+			color: white;
+		}
+
+		/* ------------------- */
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		/* -------------------- */
+	</style>
+
+	<div class="wrapper">
+
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					<a href="/about">About</a>
+
+					<a href="/register">S'inscrire</a>
+
+					<a href="/login">Se connecter</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos">
+					<h1 class="title">S'inscrire</h1>
+
+					{# le commencement du formulaire : #}
+					{{ form_start(form) }}
+
+					{# la gestion d'erreurs du formulaire : #}
+					{{ form_errors(form) }}
+
+					{# les entrées de données que l'utilisateur enregistre : #}
+					{{ form_row(form.firstname, { 'label': 'Prénom : ', 'attr': {'placeholder': 'Exemple : Joe', 'class': 'mon-form-row'}}) }}
+					<br/>
+					{{ form_row(form.lastname, { 
+                        'label': 'Nom : ',
+                        'attr': {'placeholder': 'Exemple : Doe', 'class': 'mon-form-row'}
+                    }) }}
+					<br/>
+					{{ form_row(form.email, { 
+                        'label': 'Email : ',
+                        'attr': {'placeholder': 'Exemple : joedoe@gmail.com', 'class': 'mon-form-row'}
+                    }) }}
+					<br/>
+					{{ form_row(form.password, { 
+                        'label': 'Mot de passe : ',
+                        'attr': {'placeholder': 'Exemple : 12345678', 'class': 'mon-form-row'}
+                    }) }}
+					<br/>
+					{{ form_row(form.confirm_password, { 
+                        'label': 'Confirmez votre mot de passe : ',
+                        'attr': {'placeholder': 'Confirmez le mot de passe...', 'class': 'mon-form-row'}
+                    }) }}
+					<br/>
+					{# le submit qui envoie la requête : #}
+					<div class="container-design">
+						<button type="submit" class="button-design">S'inscrire</button>
+					</div>
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

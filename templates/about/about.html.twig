@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My quizz | À propos de nous
+{% endblock %}
+
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+		}
+
+		.topnav {
+			position: fixed;
+			background-color: background: #171717;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+	</style>
+
+	<div class="wrapper">
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					<a href="/about">About</a>
+
+					<a href="/register">S'inscrire</a>
+
+					<a href="/login">Se connecter</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

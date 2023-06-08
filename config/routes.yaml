@@ -1,0 +1,141 @@
+index:
+  path: /index
+  controller: App\Controller\IndexController::index
+
+about:
+  path: /about
+  controller: App\Controller\AboutController::about
+
+register:
+  path: /register
+  controller: App\Controller\SecurityController::register
+
+app_login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
+app_logout:
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+
+# user :
+user:
+  resource: 'App\Controller\UserController'
+  type: annotation
+
+# verify email :
+app_verify_email:
+  path: /verif/{token}
+  controller: App\Controller\SecurityController::verifyUserEmail
+  requirements: { token: .+ }
+
+account_user:
+  path: /account
+  controller: App\Controller\SecurityController::account
+
+app_question:
+  path: /quizz
+  controller: App\Controller\QuizzController::index
+
+# crud :
+create:
+  path: /create-my-quizz
+  controller: App\Controller\QuizzController::create
+
+store:
+  path: /store-my-quizz
+  controller: App\Controller\QuizzController::store
+
+show:
+  path: /show-my-quizz/{id}
+  controller: App\Controller\QuizzController::show
+
+edit:
+  path: /edit-my-quizz/{id}
+  controller: App\Controller\QuizzController::edit
+
+delete:
+  path: /delete-my-quizz/{id}
+  controller: App\Controller\QuizzController::delete
+
+# categorie :
+categories:
+  path: /categories
+  controller: App\Controller\CategorieController::index
+
+categorie:
+  path: /categorie/{id}
+  controller: App\Controller\CategorieController::getCategories
+
+# Reponse :
+reponse:
+  path: /reponse/{reponse}
+  controller: App\Controller\ReponseController::getReponses
+
+# ADMIN, page index de l'admin :
+app_admin:
+  path: /admin
+  controller: App\Controller\Admin\AdminController::index
+  methods: [GET]
+
+# ADMIN, gestion des catégories :
+categories_admin:
+  path: /admin/categories
+  controller: App\Controller\Admin\CategoriesAdminController::index
+  methods: [GET]
+
+categories_ajout:
+  path: /admin/categories/ajout
+  controller: App\Controller\Admin\CategoriesAdminController::ajoutCategories
+  methods: [POST, GET]
+
+categories_edit:
+  path: /admin/categories/{id}
+  controller: App\Controller\Admin\CategoriesAdminController::editCategories
+  methods: [POST, GET]
+
+categories_delete:
+  path: /admin/categories/delete/{id}
+  controller: App\Controller\Admin\CategoriesAdminController::deleteCategories
+  methods: [POST, GET]
+
+# ADMIN, gestion des questions :
+questions_admin:
+  path: /admin/questions
+  controller: App\Controller\Admin\QuestionsAdminController::index
+  methods: [GET]
+
+questions_ajout:
+  path: /admin/questions/ajout
+  controller: App\Controller\Admin\QuestionsAdminController::ajoutQuestions
+  methods: [POST, GET]
+
+questions_edit:
+  path: /admin/questions/edit/{id}
+  controller: App\Controller\Admin\QuestionsAdminController::editQuestions
+  methods: [POST, GET]
+
+questions_delete:
+  path: /admin/questions/delete/{id}
+  controller: App\Controller\Admin\QuestionsAdminController::deleteQuestions
+  methods: [POST, GET]
+
+app_admin_users:
+  path: /admin/users
+  controller: App\Controller\Admin\UserAdminController::index
+  methods: [POST, GET]
+
+app_admin_users_create:
+  path: /admin/users/create-users
+  controller: App\Controller\Admin\UserAdminController::new
+  methods: [POST, GET]
+
+app_admin_users_edit:
+  path: /admin/users/edit-users/{id}
+  controller: App\Controller\Admin\UserAdminController::edit
+  methods: [POST, GET]
+  
+app_admin_users_delete:
+  path: /admin/users/delete-users/{id}
+  controller: App\Controller\Admin\UserAdminController::delete
+  methods: [POST, GET]

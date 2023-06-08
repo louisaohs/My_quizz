@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My quizz | Modifier, créer votre utilisateur
+{% endblock %}
+
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+		}
+
+		.topnav {
+			position: fixed;
+			background-color: background: #171717;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		/* ------------------- */
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		/* -------------------- */
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			display: flex;
+			justify-content: center;
+			width: 50%;
+			height: 70vh;
+		}
+
+		.infos {
+			padding: 20px;
+			width: 400px;
+			height: 115%;
+			background: #fc5d5d;
+			margin-top: 30%;
+			border-radius: 5px;
+			transition: ease 0.3s;
+		}
+
+		.infos:hover {
+			transform: translateY(9px);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		input {
+			border: none;
+			outline: none;
+			height: 30px;
+			border-radius: 10px;
+			padding: 5px;
+		}
+
+		label {
+			color: white;
+		}
+
+		.title {
+			text-align: center;
+			color: white;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 200px;
+			padding: 5px;
+			color: #fc5d5d;
+			font-weight: bold;
+			letter-spacing: 4px;
+		}
+
+		button {
+			cursor: pointer;
+		}
+
+		.container-design {
+			display: flex;
+			justify-content: center;
+		}
+
+		.mon-form-row {
+			display: flex;
+			flex-direction: column;
+			width: 386px;
+		}
+
+		.title {
+			text-align: center;
+			color: white;
+		}
+
+		.container-a-links {
+			display: flex;
+			justify-content: center;
+			font-weight: bold;
+
+		}
+
+		.line {
+			padding: 3px;
+		}
+
+		.links-a {
+			font-weight: bold;
+			color: white;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		label {
+			padding-right: 10px;
+		}
+	</style>
+
+	<div class="wrapper">
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					{% if app.user %}
+						Bonjour,
+						{{ app.user.firstname }}
+						{% set rolesAsString = app.user.roles|join(', ') %}
+						{# Conversion du tableau roles en une chaîne de caractères séparée par des virgules #}
+						{{ rolesAsString }}
+						<a href="{{ path('app_logout') }}">
+							Se déconnecter
+						</a>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos">
+
+					{{ form_start(form) }}
+
+					<p>{{ form_row(form.question, { 'label': 'Ajouter votre question : ', 'attr': {'placeholder': 'Exemple : Livres médiévaux', 'class': 'mon-form-row'}}) }}</p>
+					{# le submit qui envoie la requête : #}
+					<div class="container-design">
+						<br/>
+						<button type="submit" class="button-design">Ajouter</button>
+					</div>
+					<br/>
+					{{ form_end(form) }}
+					<br/>
+					<a href="{{ path('app_admin') }}" class="links-a">Retour à la page admin ↩</a>
+					<a href="{{ path('index') }}" class="links-a">Retour à l'index ↩</a>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

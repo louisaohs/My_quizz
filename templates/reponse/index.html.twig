@@ -1,0 +1,345 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My_quizz | Fin du quizz
+{% endblock %}
+
+{% block body %}
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+
+		}
+
+		.topnav {
+			position: fixed;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		/* ----------------------- */
+
+		.container-describe {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage-describe {
+			position: relative;
+			background-color: #202020;
+			width: 60%;
+			height: 200vh;
+		}
+
+		.infos-set {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			width: 500px;
+			-webkit-display: flex;
+			background-color: #171717;
+			border-radius: 10px;
+			padding: 20px;
+			text-align: justify;
+			transition: ease 0.3s;
+		}
+
+		.infos-set:hover {
+			transform: translateY(9px);
+		}
+
+		.line {
+			padding: 50px;
+		}
+
+		/* ----------------------- */
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			background-color: #171717;
+			width: 60%;
+			height: 30vh;
+		}
+
+		.infos {
+			margin-top: 30%;
+		}
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		.lists-questions {
+			text-align: justify;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 500px;
+			font-size: 20px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		.container-design {
+			display: flex;
+			justify-content: center;
+		}
+
+		.button-design-delete {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 200px;
+			font-size: 15px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		.links-a {
+			font-weight: bold;
+		}
+
+		button {
+			cursor: pointer;
+		}
+
+		/* -------------------- */
+
+		.container-describe {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage-describe {
+			position: relative;
+			background-color: #202020;
+			width: 60%;
+			height: 200vh;
+		}
+
+		.infos-set {
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			position: relative;
+			width: 95%;
+			-webkit-display: flex;
+			background-color: #171717;
+			border-radius: 10px;
+			padding: 20px;
+			text-align: justify;
+			transition: ease 0.3s;
+		}
+
+		.infos-set:hover {
+			transform: translateY(9px);
+		}
+
+		.line {
+			padding: 50px;
+		}
+
+		/* ----------------------- */
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			background-color: #171717;
+			width: 60%;
+			height: 30vh;
+		}
+
+		.infos {
+			margin-top: 30%;
+		}
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		.lists-questions {
+			text-align: justify;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 300px;
+			font-size: 20px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		.title-categories {
+			letter-spacing: 3px;
+		}
+
+		.infos-scores {
+			font-size: 30px;
+		}
+
+		.infos-s {
+			font-weight: bold;
+		}
+
+		.title-score {
+			letter-spacing: 3px;
+			font-weight: bold;
+			text-decoration: underline;
+			color: #fc5d5d;
+		}
+	</style>
+
+	<div class="wrapper">
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					{% if app.user %}
+						Bonjour,
+						{{ app.user.firstname }}
+
+						<a href="{{ path('app_logout') }}" class="test">
+							Se déconnecter</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos"></div>
+			</div>
+		</div>
+
+		<div class="container-describe">
+			<div class="homepage-describe">
+				<div class="line">
+					<div class="infos-set">
+
+						<div class="infos-scores">
+							<h1 class="title-score">Ton score</h1>
+							<p class="infos-s">Fin du quizz :
+								{{ categorie[0].name }}</p>
+							<br/>
+							<p class="infos-s">Total de toutes les questions répondues :</p>
+							{{ questions|length }}
+
+							<div>
+								<p class="infos-s">Bonne réponse :</p>
+								<strong>{{ score['goodAnswer'] + 1 }}</strong>
+								<div>
+									<p class="infos-s">Mauvaise réponse :</p>
+									<strong>
+										{% if score['badAnwser'] == 0 %}
+											<div>
+												<p class="infos-s">Aucune mauvaise réponse</p>
+											</div>
+										{% else %}
+											<div>{{ score['badAnwser'] }}</div>
+										{% endif %}
+									</strong>
+
+									{% if score['goodAnswer'] == questions|length - 1 %}
+
+										{% if app.user %}
+											<div>
+												<p class="infos-s">Bravo !
+													{{ app.user.firstname}}
+													Tu as gagné le quizz !</p>
+											</div>
+										{% endif %}
+
+									{% else %}
+										{% if app.user %}
+											<div>
+												<p class="infos-s">Bien joué,
+													{{ app.user.firstname }}
+													! 
+																																																																	Tu feras mieux la prochaine fois. 😄</p>
+											</div>
+										{% endif %}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						<a href="{{ path('account_user') }}" class="links-a">Retour à mon compte ↩</a>
+						<a href="{{ path('index') }}" class="links-a">Retour à l'index ↩</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

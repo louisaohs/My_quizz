@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My quizz | Afficher mon compte utilisateur
+{% endblock %}
+
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+		}
+
+		.topnav {
+			position: fixed;
+			background-color: background: #171717;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		.container-describe {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage-describe {
+			background-color: #202020;
+			width: 60%;
+			height: 80vh;
+		}
+
+		/* ------------------- */
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			background-color: #171717;
+			width: 60%;
+			height: 40vh;
+		}
+
+		/* ------------------- */
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		/* -------------------- */
+
+		.test {
+			padding-left: 20px;
+		}
+
+		.line {
+			display: flex;
+			justify-content: center;
+			padding: 20px;
+		}
+
+		.infos-set {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			width: 800px;
+			-webkit-display: flex;
+			background-color: #171717;
+			border-radius: 10px;
+			padding: 20px;
+			transition: ease 0.3s;
+		}
+
+		.infos-set:hover {
+			transform: translateY(9px);
+		}
+
+		.text {
+			text-align: center;
+		}
+
+		.links-a {
+			font-weight: bold;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 500px;
+			font-size: 20px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		button {
+			cursor: pointer;
+		}
+	</style>
+
+	<div class="wrapper">
+
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					{% if app.user %}
+						Bonjour,
+						{{ app.user.firstname }}
+
+						<a href="{{ path('app_logout') }}" class="test">
+							Se déconnecter</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos"></div>
+			</div>
+		</div>
+
+		<div class="container-describe">
+			<div class="homepage-describe">
+				<div class="line">
+					<div class="infos-set">
+						<h1>Mon compte utilisateur</h1>
+
+						<p>
+							<strong>Mon id :</strong>
+							{{ user.id }}</p>
+						<p>
+							<strong>Mon prénom :</strong>
+							{{ user.firstname }}</p>
+						<p>
+							<strong>Mon nom :</strong>
+							{{ user.lastname }}</p>
+						<p>
+							<strong>Mon email :</strong>
+							{{ user.email }}</p>
+						<p>
+							<strong>Mon mot de passe :</strong>
+							{{ user.password }}</p>
+
+						<a href="{{ path('app_user_index') }}" class="links-a">Retour à mon profil ↩</a>
+
+						<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="links-a">Modifier mes informations personnelles</a>
+						<br/>
+
+						<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous vraiment sûr(e) de vouloir supprimer votre compte ?');">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+							<button class="button-design">Supprimer mon compte</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

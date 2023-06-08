@@ -1,0 +1,239 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My_quizz | Toute l'historique de mes questions
+{% endblock %}
+
+{% block body %}
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400 &display=swap');
+
+		body {
+			margin: 0;
+			background: #171717;
+			color: #c4c4c4;
+			font-family: 'Poppins', sans-serif;
+			line-height: 1.5;
+		}
+
+
+		a {
+			text-decoration: none;
+			color: #fc5d5d;
+		}
+
+		.container-navbar {
+			display: flex;
+			justify-content: center;
+
+		}
+
+		.topnav {
+			position: fixed;
+			width: 60%;
+			height: calc(30px * 2 + 1.3rem + 1px);
+		}
+
+		.topnav a {
+			margin-right: 30px;
+		}
+
+		.links {
+			margin-top: 30px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			-webkit-transition: all 0.6s ease-in-out;
+			color: #A7C7E7;
+		}
+
+		/* ----------------------- */
+
+		.container-describe {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage-describe {
+			position: relative;
+			background-color: #202020;
+			width: 60%;
+			height: 200vh;
+		}
+
+		.infos-set {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			width: 500px;
+			-webkit-display: flex;
+			background-color: #171717;
+			border-radius: 10px;
+			padding: 20px;
+			text-align: justify;
+			transition: ease 0.3s;
+		}
+
+		.infos-set:hover {
+			transform: translateY(9px);
+		}
+
+		.line {
+			padding: 50px;
+		}
+
+		/* ----------------------- */
+
+		.container-homepage {
+			display: flex;
+			justify-content: center;
+		}
+
+		.homepage {
+			background-color: #171717;
+			width: 60%;
+			height: 30vh;
+		}
+
+		.infos {
+			margin-top: 30%;
+		}
+
+		::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #555;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #fc5d5d;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+
+		.lists-questions {
+			text-align: justify;
+		}
+
+		.button-design {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 500px;
+			font-size: 20px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		.container-design {
+			display: flex;
+			justify-content: center;
+		}
+
+		.button-design-delete {
+			border: none;
+			border-radius: 10px;
+			background-color: white;
+			width: 200px;
+			font-size: 15px;
+			padding: 5px;
+			color: #fc5d5d;
+			background: #e3dac9;
+			font-weight: bold;
+		}
+
+		.links-a {
+			font-weight: bold;
+		}
+
+		button {
+			cursor: pointer;
+		}
+	</style>
+
+	<div class="wrapper">
+		<div class="container-navbar">
+			<div class="topnav">
+				<div class="links">
+					<a href="/index">Index</a>
+
+					{% if app.user %}
+						Bonjour,
+						{{ app.user.firstname }}
+
+						<a href="{{ path('app_logout') }}" class="test">
+							Se déconnecter</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="container-homepage">
+			<div class="homepage">
+				<div class="infos">
+				
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container-describe">
+			<div class="homepage-describe">
+				<div class="line">
+					<div class="infos-set">
+						<div class="container-design">
+							<button class="button-design">
+								<a href="{{ path('create') }}">Créer une nouvelle question<i class="fa-solid fa-plus"></i>
+								</a>
+							</button>
+						</div>
+						<br/>
+						{# ---------------------------- #}
+						<a href="{{ path('categories') }}" class="links-a">Sélectionner par catégories<i class="fa-solid fa-plus"></i>
+						</a>
+						<p>Vous pouvez sélectionner vos catégories selon sur les questions auxquelles on vous propose, celle dont vous proposez.</p>
+						{# ---------------------------- #}
+						<h1>L'historique de toutes mes questions</h1>
+
+						{# foreach : #}
+						{% for question in questions %}
+
+							<div class="lists-questions">
+								<ul>
+									<li>{{ question.name }}</li>
+									<ul>
+										<br/>
+
+										<a href="{{ path('show', { id : question.id }) }}">Voir le détail de ma question</a>
+										<br/>
+										<a href="{{ path('edit', { id : question.id }) }}">Modifier ma question</a>
+										<br/>
+										<br/>
+										<form action="{{ path('delete', { id : question.id }) }}" method="post" onsubmit="return confirm('Êtes-vous vraiment sûr(e) de vouloir supprimer votre question ?');">
+											<button class="button-design-delete">
+												<p>Supprimer ma question</p>
+											</button>
+										</form>
+									</ul>
+									<br/>
+								</ul>
+							</div>
+						{% endfor %}
+					</div>
+
+					<br/>
+					<a href="{{ path('account_user') }}" class="links-a">Retour à mon compte ↩</a>
+					<a href="{{ path('index') }}" class="links-a">Retour à l'index ↩</a>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
